@@ -1,0 +1,23 @@
+GET http://172.27.150.191:3001/quiz
+
+###
+
+POST  http://localhost:3001/quiz/create
+Content-Type: application/json
+
+{
+    "title": "helloasdasdasd aaddsd asss",
+    "description": "this is detailss"
+}
+
+###
+GET http://172.27.150.191:3001/quiz/1
+
+###
+GET http://172.27.150.191:3001/quiz/q?name=Hi
+
+###
+GET http://172.27.150.191:3001/quiz/ex/hello
+
+###
+GET http://172.27.150.191:3001/user/
