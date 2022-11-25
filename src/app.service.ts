@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 export class AppService {
 
     @Inject(ConfigService)
-    public config: ConfigService;
+    public  config: ConfigService;
 
     getHello(): string {
         const databaseName: string = this.config.get('DB_QUIZ_HOST');

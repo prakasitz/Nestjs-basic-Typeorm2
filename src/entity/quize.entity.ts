@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity('quizs')
+@Entity('quiz')
 
 export class Quiz extends BaseEntity {
     @PrimaryGeneratedColumn({
@@ -22,5 +22,8 @@ export class Quiz extends BaseEntity {
         type: 'datetime',
     })
     created_date: string;
+
+    @Column()
+    isActive: number;
 
 }

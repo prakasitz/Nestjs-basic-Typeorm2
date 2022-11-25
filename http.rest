@@ -1,23 +1,45 @@
-GET http://172.27.150.191:3001/quiz
+# variable
+@domain=localhost:3001
+###
+GET http://{{domain}}/quiz
 
 ###
 
-POST  http://localhost:3001/quiz/create
+POST  http://{{domain}}/quiz/create
 Content-Type: application/json
 
 {
     "title": "helloasdasdasd aaddsd asss",
-    "description": "this is detailss"
+    "description": "this is detailss",
+    "isActive": 1
 }
 
 ###
-GET http://172.27.150.191:3001/quiz/1
+GET http://{{domain}}/quiz/1
 
 ###
-GET http://172.27.150.191:3001/quiz/q?name=Hi
+GET http://{{domain}}/quiz/q?name=Hi
 
 ###
-GET http://172.27.150.191:3001/quiz/ex/hello
+GET http://{{domain}}/quiz/ex/hello
 
 ###
-GET http://172.27.150.191:3001/user/
+GET http://{{domain}}/user/
+
+###
+POST  http://{{domain}}/user/create
+Content-Type: application/json
+
+{
+    "username": "lijinx",
+    "firstName": "Habor",
+    "age": 102,
+    "hobbys": [
+        {
+            "name": "test1",
+            "frequency": "10"
+        }
+    ],
+    "str_list": ["1","2"]
+
+}

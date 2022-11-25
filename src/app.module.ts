@@ -8,8 +8,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { QuizConnectionService } from './conections/quiz.connection.service';
 import { UserConnectionService } from './conections/user.connection.service';
 import { DataSource } from 'typeorm';
-import { NestApplication } from '@nestjs/core';
+import { APP_FILTER, NestApplication } from '@nestjs/core';
 import { Logger as NestLogger } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserMongooseService } from './conections/user.mongoose.service';
+import {testFilterException } from './exceptions/all-exception.filter';
 
 @Module({
     imports: [
@@ -24,20 +27,29 @@ import { Logger as NestLogger } from '@nestjs/common';
             },
             name: 'quizConnection'
         }),
-        TypeOrmModule.forRootAsync({
-            useClass: UserConnectionService,
-            dataSourceFactory: async (options) => {
-                const dataSource = await new DataSource(options).initialize();
-                return dataSource;
-            },
-            name: "userConnection"
+        // TypeOrmModule.forRootAsync({
+        //     useClass: UserConnectionService,
+        //     dataSourceFactory: async (options) => {
+        //         const dataSource = await new DataSource(options).initialize();
+        //         return dataSource;
+        //     },
+        //     name: "userConnection"
+        // }),
+        MongooseModule.forRootAsync({
+            useClass: UserMongooseService,
+            connectionName: "userMongoose",
         }),
-        // SomeModule,
         QuizModule,
         UserModule,
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [
+        AppService,
+        // {
+        //     provide: APP_FILTER,
+        //     useClass:testFilterException,
+        // }
+    ],
 })
 export class AppModule {
     public async hello(options) {

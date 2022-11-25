@@ -13,7 +13,7 @@ export class UserConnectionService implements TypeOrmOptionsFactory {
         return {
             type: "mongodb",
             host: this.configService.get("DB_USER_HOST"), 
-            port: Number(this.configService.get("DB_USER_POST")), 
+            port: Number(this.configService.get("DB_USER_PORT")), 
             database: this.configService.get("DB_USER_DATABASE"), 
             poolSize: 1000,
             connectTimeoutMS: 30000,
