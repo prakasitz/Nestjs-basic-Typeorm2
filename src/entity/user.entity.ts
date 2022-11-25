@@ -1,3 +1,4 @@
+import { hobby } from "src/modules/user/dto/CreateUser.dto";
 import { BaseEntity, Column, Entity, ObjectID, ObjectIdColumn, OneToOne } from "typeorm";
 import {IUser} from "../modules/user/IUser"
 import { Hobbys } from "./Hobby.model";
@@ -21,11 +22,10 @@ export class User extends BaseEntity  {
     age: number
 
     @Column(() => Profile)
-    // @OneToOne('Profile', 'profile')
     profile: Profile;
 
-    // @Column(() => Hobbys)
-    // hobbys: Hobbys[];
+    @Column(() => hobby)
+    hobbys: hobby[];
 
     @Column()
     str_list: string[]

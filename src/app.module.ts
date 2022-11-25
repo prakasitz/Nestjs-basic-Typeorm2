@@ -27,18 +27,18 @@ import {testFilterException } from './exceptions/all-exception.filter';
             },
             name: 'quizConnection'
         }),
-        // TypeOrmModule.forRootAsync({
-        //     useClass: UserConnectionService,
-        //     dataSourceFactory: async (options) => {
-        //         const dataSource = await new DataSource(options).initialize();
-        //         return dataSource;
-        //     },
-        //     name: "userConnection"
-        // }),
-        MongooseModule.forRootAsync({
-            useClass: UserMongooseService,
-            connectionName: "userMongoose",
+        TypeOrmModule.forRootAsync({
+            useClass: UserConnectionService,
+            dataSourceFactory: async (options) => {
+                const dataSource = await new DataSource(options).initialize();
+                return dataSource;
+            },
+            name: "userConnection"
         }),
+        // MongooseModule.forRootAsync({
+        //     useClass: UserMongooseService,
+        //     connectionName: "userMongoose",
+        // }),
         QuizModule,
         UserModule,
     ],
@@ -52,9 +52,9 @@ import {testFilterException } from './exceptions/all-exception.filter';
     ],
 })
 export class AppModule {
-    public async hello(options) {
-        const dataSource = await new DataSource(options).initialize();
-        return dataSource;
-    }
+    // public async hello(options) {
+    //     const dataSource = await new DataSource(options).initialize();
+    //     return dataSource;
+    // }
 }
 
