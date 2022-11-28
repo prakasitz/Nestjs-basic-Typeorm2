@@ -53,31 +53,21 @@ Content-Type: application/json
     "userId": "6380ab856bcd993328f03d1b",
   "hobbys": [
     {
-      "id": "6380f249ef8c09e5fcf91ab7",
-      "name": "abc5",
-      "frequency": "1",
-      "createDate": "2022-11-25T16:50:17.728Z",
-      "updateDate": "2022-11-25T16:59:47.212Z"
+      "id": "6384b5b549a80a2c50d9b30e",
+      "name": "def",
+      "frequency": "44444",
+      "createDate": "2022-11-28T13:20:53.095Z",
+      "updateDate": null
     },
     {
-      "id": "6380f255ec0aa6c0f4869e29",
-      "name": "def6",
-      "frequency": "2",
-      "createDate": "2022-11-25T16:50:29.712Z"
+      "id": "6384b5c049a80a2c50d9b30f",
+      "createDate": "2022-11-28T13:21:04.153Z",
+      "name": "def",
+      "frequency": "123"
     },
     {
-      "name": "zxc8",
-      "frequency": "3",
-      "id": "6380f483de3da78224d7329e",
-      "createDate": "2022-11-25T16:59:47.209Z"
-    },
-        {
-      "name": "ttt",
-      "frequency": "000"
-    },
-            {
-      "name": "ttt",
-      "frequency": "000"
+      "name": "hello",
+      "frequency": "20"
     }
   ]
 }
