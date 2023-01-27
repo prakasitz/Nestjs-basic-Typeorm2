@@ -24,6 +24,6 @@ export class Quiz extends BaseEntity {
     created_date: string;
 
     @Column()
-    isActive: number;
+    isActive: boolean;
 
 }

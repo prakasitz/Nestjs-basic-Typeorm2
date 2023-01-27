@@ -10,5 +10,5 @@ export class createQuizDto {
     description: string;
 
     @IsEnum([0,1])
-    isActive: number
+    isActive: boolean
 }
