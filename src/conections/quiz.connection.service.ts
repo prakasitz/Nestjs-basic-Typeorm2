@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
 import { Quiz } from '../entity/quize.entity';
+import { Pinsuay2 } from 'src/entity/pinsuay2.entity';
 
 @Injectable()
 export class QuizConnectionService implements TypeOrmOptionsFactory {
@@ -33,7 +34,7 @@ export class QuizConnectionService implements TypeOrmOptionsFactory {
                 cancelTimeout: 1000,
             },
             maxQueryExecutionTime: 1000,
-            entities: [Quiz],
+            entities: [Quiz, Pinsuay2],
         };
     }
 }

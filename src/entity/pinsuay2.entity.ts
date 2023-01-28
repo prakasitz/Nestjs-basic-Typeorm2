@@ -1,7 +1,8 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Quiz } from "./quize.entity";
 
-@Entity('quiz')
-export class Quiz extends BaseEntity {
+@Entity('pinsuay2')
+export class Pinsuay2 extends Quiz {
     @PrimaryGeneratedColumn({
         comment: 'The quiz unique identifier',
     })
