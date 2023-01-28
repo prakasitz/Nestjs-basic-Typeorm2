@@ -18,22 +18,22 @@ export class QuizConnectionService implements TypeOrmOptionsFactory {
             password: this.configService.get('DB_QUIZ_PASSWORD'),
             database: this.configService.get('DB_QUIZ_DATABASE'),
             synchronize: false,
-            connectionTimeout: 1000,
-            requestTimeout: 1000,
+            connectionTimeout: 5000,
+            requestTimeout: 5000,
             retryAttempts: 1,
             pool: {
-                max: 100,
+                max: 70000,
                 min: 1,
-                acquireTimeoutMillis: 1000,
+                acquireTimeoutMillis: 5000,
             },
             extra: {
                 trustServerCertificate: true,
             },
             options: {
                 tdsVersion: '7_4',
-                cancelTimeout: 1000,
+                cancelTimeout: 5000,
             },
-            maxQueryExecutionTime: 1000,
+            maxQueryExecutionTime: 5000,
             entities: [Quiz, Pinsuay2],
         };
     }

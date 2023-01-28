@@ -47,7 +47,7 @@ export class QuizController {
 
     @Post('/upload')
     @UseInterceptors(FileInterceptor('LeaveConfigFile'))
-    uploadFile(
+    async uploadFile(
         @UploadedFile(
         new ParseFilePipe({
             validators: [
@@ -56,15 +56,18 @@ export class QuizController {
             ],
           })
     ) file: Express.Multer.File) {
-        
-        const workbook = XLSX.read(file.buffer, {type: "buffer"})
+        console.time('uploadFileController')
+        const workbook = XLSX.read(file.buffer, {type: "buffer", cellDates: true})
         const excelData = XLSX.utils.sheet_to_json(workbook.Sheets["Sheet1"], {
             raw: true,
-            header: 1
+            header: 0
         })
-
+        const a = await this.quizeService.createBulkQuiz(excelData)
+        console.log(a)
+        console.timeEnd('uploadFileController')
       return {
-        excelData: excelData.length
+        messageStatus: a == 1 ? a : 0,
+        messageDescription: a == 1 ?  `Uploaded row: ${excelData.length}` : 'Error on Executing'
       }
     }
 }

@@ -3,6 +3,7 @@ import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { Quiz } from 'src/entity/quize.entity';
 import { DataSource, Repository } from 'typeorm';
 import { createQuizDto } from './dto/CreateQuiz.dto';
+import { Pinsuay2 } from 'src/entity/pinsuay2.entity';
 
 @Injectable()
 export class QuizService {
@@ -66,6 +67,27 @@ export class QuizService {
         }
 
         return result;
+    }
+
+    async createBulkQuiz(bulkData) {
+        console.time('createBulkQuiz');
+        let status = 0;
+        try {
+            let result = await this.dbQuiz
+                .createQueryBuilder()
+                .insert()
+                .into(Pinsuay2)
+                .values(bulkData)
+                .execute();
+            status = 1;
+            console.log('executed :D', result);
+        } catch (error) {
+            console.log('catch!', error);
+            status = 0;
+        } finally {
+            console.timeEnd('createBulkQuiz');
+        }
+        return status;
     }
 
     async createNewQuiz(quiz: createQuizDto) {
