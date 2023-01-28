@@ -62,7 +62,7 @@ export class QuizController {
             raw: true,
             header: 0
         })
-        const a = await this.quizeService.createBulkQuiz(excelData)
+        const a = await this.quizeService.createBulkQuiz1(excelData)
         console.log(a)
         console.timeEnd('uploadFileController')
       return {

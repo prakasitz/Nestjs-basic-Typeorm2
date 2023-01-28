@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { Quiz } from 'src/entity/quize.entity';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, Repository, getRepository } from 'typeorm';
 import { createQuizDto } from './dto/CreateQuiz.dto';
 import { Pinsuay2 } from 'src/entity/pinsuay2.entity';
 
@@ -69,16 +69,12 @@ export class QuizService {
         return result;
     }
 
-    async createBulkQuiz(bulkData) {
+    async createBulkQuiz1(bulkData) {
         console.time('createBulkQuiz');
         let status = 0;
         try {
             let result = await this.dbQuiz
-                .createQueryBuilder()
-                .insert()
-                .into(Pinsuay2)
-                .values(bulkData)
-                .execute();
+            .getRepository(Pinsuay2).save(bulkData, { chunk: 524 });
             status = 1;
             console.log('executed :D', result);
         } catch (error) {
