@@ -1,8 +1,12 @@
-import { BadRequestException, HttpCode, Body, Controller, Get, Param, ParseIntPipe, Post, Query, Req, Res, UseGuards } from '@nestjs/common';
+import { BadRequestException, HttpCode, Body, Controller, Get, Param, ParseIntPipe, Post, Query, Req, Res, UseGuards, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, HttpStatus } from '@nestjs/common';
 import type { Request, Response } from 'express';
 
 import { createQuizDto } from './dto/CreateQuiz.dto';
 import { QuizService } from './quize.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ExcelFileSizeValidationPipe } from 'src/pipes/excelFileValidation.pipe';
+
+import * as XLSX from 'xlsx'
 
 @Controller('quiz')
 export class QuizController {
@@ -40,5 +44,28 @@ export class QuizController {
     @HttpCode(200)
     public async createQuiz(@Body() quizData: createQuizDto) {
         return await this.quizeService.createNewQuiz(quizData);
+    }
+
+    @Post('/upload')
+    @UseInterceptors(FileInterceptor('LeaveConfigFile'))
+    uploadFile(
+        @UploadedFile(
+        new ParseFilePipe({
+            validators: [
+                new MaxFileSizeValidator({ maxSize: 1000 *  1000 * 20 }), //20MB
+                new FileTypeValidator({ fileType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+            ],
+          })
+    ) file: Express.Multer.File) {
+        
+        const workbook = XLSX.read(file.buffer, {type: "buffer"})
+        const excelData = XLSX.utils.sheet_to_json(workbook.Sheets["Sheet1"], {
+            raw: true,
+            header: 1
+        })
+
+      return {
+        excelData: excelData.length
+      }
     }
 }
