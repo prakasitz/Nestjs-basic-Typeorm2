@@ -45,6 +45,12 @@ export class QuizController {
         return await this.quizeService.createNewQuiz(quizData);
     }
 
+
+    @Post('/bulk')
+    async bulk() {
+        return this.quizeService.createBulkQuiz2()
+    }
+
     @Post('/upload')
     @UseInterceptors(FileInterceptor('LeaveConfigFile'))
     async uploadFile(
@@ -63,7 +69,6 @@ export class QuizController {
             header: 0
         })
         const a = await this.quizeService.createBulkQuiz1(excelData)
-        console.log(a)
         console.timeEnd('uploadFileController')
       return {
         messageStatus: a == 1 ? a : 0,

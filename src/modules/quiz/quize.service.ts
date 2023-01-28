@@ -74,15 +74,46 @@ export class QuizService {
         let status = 0;
         try {
             let result = await this.dbQuiz
-            .getRepository(Pinsuay2).save(bulkData, { chunk: 524 });
+            .manager
+
+            // .insert(Pinsuay2, [bulkData[0]]) // same way
+
+            // .getRepository(Pinsuay2) // same way
+            // .save<Pinsuay2>([bulkData[0]]);
+
+            // .createQueryBuilder()
+            // .insert()
+            // .into(Pinsuay2)
+            // .values([bulkData[0]])
+            // .execute() 
+
+            .createQueryBuilder().insert().into(Pinsuay2)
+            .values([bulkData[0]]).setQueryRunner
+            console.log(result)
             status = 1;
-            console.log('executed :D', result);
         } catch (error) {
             console.log('catch!', error);
             status = 0;
         } finally {
             console.timeEnd('createBulkQuiz');
         }
+        return status;
+    }
+
+    async createBulkQuiz2() {
+        console.time('createBulkQuiz');
+        let status = 0;
+        // try {
+        //     let result = await this.dbQuiz
+        //     .getRepository(Pinsuay2).save(bulkData, { chunk: 524 });
+        //     status = 1;
+        //     console.log('executed :D', result);
+        // } catch (error) {
+        //     console.log('catch!', error);
+        //     status = 0;
+        // } finally {
+        //     console.timeEnd('createBulkQuiz');
+        // }
         return status;
     }
 
