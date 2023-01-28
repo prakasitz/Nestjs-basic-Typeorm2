@@ -4,7 +4,6 @@ import type { Request, Response } from 'express';
 import { createQuizDto } from './dto/CreateQuiz.dto';
 import { QuizService } from './quize.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ExcelFileSizeValidationPipe } from 'src/pipes/excelFileValidation.pipe';
 
 import * as XLSX from 'xlsx'
 
